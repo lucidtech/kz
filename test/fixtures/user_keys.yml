@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cipher_key: MyString
+  cipher_iv: MyString
+  identifier: MyString
+  type: 
+
+two:
+  cipher_key: MyString
+  cipher_iv: MyString
+  identifier: MyString
+  type: 

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cipher key:</strong>
+  <%= @user_key.cipher_key %>
+</p>
+
+<p>
+  <strong>Cipher iv:</strong>
+  <%= @user_key.cipher_iv %>
+</p>
+
+<p>
+  <strong>Identifier:</strong>
+  <%= @user_key.identifier %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @user_key.type %>
+</p>
+
+<%= link_to 'Edit', edit_user_key_path(@user_key) %> |
+<%= link_to 'Back', user_keys_path %>

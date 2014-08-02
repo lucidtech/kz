@@ -1,0 +1,31 @@
+<h1>Listing user_keys</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cipher key</th>
+      <th>Cipher iv</th>
+      <th>Identifier</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_keys.each do |user_key| %>
+      <tr>
+        <td><%= user_key.cipher_key %></td>
+        <td><%= user_key.cipher_iv %></td>
+        <td><%= user_key.identifier %></td>
+        <td><%= user_key.type %></td>
+        <td><%= link_to 'Show', user_key %></td>
+        <td><%= link_to 'Edit', edit_user_key_path(user_key) %></td>
+        <td><%= link_to 'Destroy', user_key, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User key', new_user_key_path %>
