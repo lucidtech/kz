@@ -1,28 +1,40 @@
-== README
+== keyz.io
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+=== Introduction
+----------
 
-Things you may want to cover:
+keyz.io is a Rails application that provides a RESTful API to authorized clients to generate and retrieve cryptographic keys.
+The API is intended to public.  keyz.io expects to offer libraries for different platforms that provide for simple integration.
 
-* Ruby version
+JSON API supported verbs
+HTTP    Verb	Path	                        Controller#Action	Used for
+        GET	    /user_keys	                    user_keys#index     retrieve a list of all keys for the authorized user
+        GET     /user_keys?identifier=xxx       user_keys#index     retrieves a specific key based on the url param
+        POST    /user_keys                      user_keys#create    request a new key.  Must pass an identifier in to the call i.e. {"identifier":"somesting"}
+        POST    /users                          users#create        create a new account {"email":"someemail":"password":"somepassword"}
+        POST    /sessions                       sessions#create     authenticate the session {"email":"someemail":"password":"somepassword"}
 
-* System dependencies
+usage
 
-* Configuration
+To create a key you must specify a unique identifier for that key.  This identifier is used by the calling application
+to reference the key.  For example, if you are encrypting a file, you could supply the filename.
 
-* Database creation
+POST /user_keys.json with {"identifier":"somedescriptor"}
 
-* Database initialization
+If successful the API will return:
 
-* How to run the test suite
+{"id":14,"cipher_type":"AES-256-CBC","created_at":"2014-07-28T22:30:15.796Z","updated_at":"2014-07-28T22:30:15.796Z","cipher_key":"bekdtW7El6LJMO46f5o5FXFPmsgHqdvRMDTXd5E4kGk=","cipher_iv":"9o1wNgFcAySSkZpVomanKw==","identifier":"somedescriptor"}
 
-* Services (job queues, cache servers, search engines, etc.)
+To retrieve the key in the future use a GET on /user_keys.json with a url param
 
-* Deployment instructions
+GET /user_keys.json?identifier=somedescriptor
 
-* ...
+will return the same object, as a singleton in an array
 
+[{"id":14,"cipher_type":"AES-256-CBC","created_at":"2014-07-28T22:30:15.796Z","updated_at":"2014-07-28T22:30:15.796Z","cipher_key":"bekdtW7El6LJMO46f5o5FXFPmsgHqdvRMDTXd5E4kGk=","cipher_iv":"9o1wNgFcAySSkZpVomanKw==","identifier":"somedescriptor"}]
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+A Call to GET /user_keys
+
+will return all keys belonging to the user in an array
+
+Key and IV are Base64 encoded
